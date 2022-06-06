@@ -15,7 +15,8 @@ class DB_Requests extends Database_Model
     protected static $table = 'requests';
 }
 
-# Example
+# Examples
+
 // return all rows from 'requests' table
 $requests = DB_Requests::getResults(); 
 
