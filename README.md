@@ -12,7 +12,7 @@ use ADHK\WP\Database_Model;
 
 class DB_Requests extends Database_Model
 {
-    public static $table = 'requests';
+    protected static $table = 'requests';
 }
 
 # Example
