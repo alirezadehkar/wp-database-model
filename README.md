@@ -6,8 +6,9 @@ You can use this database model for your wordpress projects, using wordpress dat
 
 Sample usage:
 
-```php
+Sample 1/
 
+```php
 use AlirezaDehkar\WPDBModel\Database_Model;
 
 class DB_Requests extends Database_Model
@@ -15,31 +16,40 @@ class DB_Requests extends Database_Model
     protected static $table = 'requests';
 }
 
-# Examples
+$requests = new DB_Requests();
+```
 
-// return all rows from 'requests' table
-$requests = DB_Requests::getResults(); 
+Sample 2/
 
-// return a row with params
-$request = DB_Requests::get(['id' => 1]);
+```php
+use AlirezaDehkar\WPDBModel\Database as DB;
 
-// insert data to 'requests' table
-$insert = DB_Requests::insert(['name' => 'Alireza', 'family' => 'Dehkar']);
+$requests = new DB('requests');
+```
 
-$update = DB_Requests::update(['name' => 'Alireza'], ['id' => 1]); // $data, $where
+Methods
 
-// delete data with params from 'requests' table
-$delete = DB_Requests::delete(['id' => 1]); 
+```php
 
-// get all rows count
-$count = DB_Requests::count(); 
+# Usage Methods
 
-// get rows coutn with params
-$countBy = DB_Requests::countBy(['user_id' => 1]); 
+$requests = $requests->getResults(); // return all rows from 'requests' table
+
+$request = $requests->get(['id' => 1]); // return a row with params
+
+$insert = $requests->insert(['name' => 'Alireza', 'family' => 'Dehkar']); // insert data to 'requests' table
+
+$update = $requests->update(['name' => 'Alireza'], ['id' => 1]); // $data, $where
+
+$delete = $requests->delete(['id' => 1]); // delete data with params from 'requests' table
+
+$count = $requests->count(); // get all rows count
+
+$countBy = $requests->countBy(['user_id' => 1]); // get rows coutn with params
 
 # Methods "getResults,count" supports parameters (per_page, offset, order, order_by, fields)
 
-$byFields = DB_Requests::getResults([
+$byFields = $requests->getResults([
   'fields' => [
     [
       'key' => 'status',
