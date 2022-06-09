@@ -3,13 +3,18 @@ namespace AlirezaDehkar\WPDBModel;
 
 class Database extends Database_Model
 {
-    private static $instance = null;
-
-    public static function getInstance(){
-        if(static::$instance == null){
-            static::$instance = new self();
+    /**
+     * 
+     * Database_Model __construct
+     * 
+     */
+    public function __construct($table = '')
+    {
+        global $wpdb;
+        $this->wpdb = $wpdb;
+        $this->prefix = $this->wpdb->prefix;
+        if(!empty($table)){
+            static::$table = $table;
         }
-
-        return static::$instance;
     }
 }
