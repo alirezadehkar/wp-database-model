@@ -8,7 +8,7 @@ Sample usage:
 
 ```php
 
-use ADHK\WP\Database_Model;
+use AlirezaDehkar\WPDBModel\Database_Model;
 
 class DB_Requests extends Database_Model
 {
