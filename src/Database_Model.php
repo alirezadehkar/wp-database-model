@@ -1,11 +1,10 @@
 <?php
- namespace AlirezaDehkar\WPDBModel;
-
-use AlirezaDehkar\WPDBModel\Database_Generator;
-
-abstract class Database_Model extends Database_Generator
+namespace AlirezaDehkar\WPDBModel;
+abstract class Database_Model
 {
-    protected static $table_name;
+    private $wpdb;
+    private $prefix;
+    protected static $table;
 
     /**
      * Generate where sql query
@@ -13,7 +12,7 @@ abstract class Database_Model extends Database_Generator
      * @param array $params
      * @return void
      */
-    private static function preSql($params = []){
+    private function preSql($params = []){
         $where = '';
         $value = '';
         $fields = (isset($params['fields']) && is_array($params['fields']) && count($params['fields']) > 0) ? $params['fields'] : [];
@@ -61,13 +60,12 @@ abstract class Database_Model extends Database_Generator
      * @param array $params
      * @return void
      */
-    public static function getResults($params = [])
+    public function getResults($params = [])
     {
-        global $wpdb;
-        $table = static::$table_name;
-        $pre_sql = static::preSql($params);
+        $table = $this->prefix . $this->table;
+        $pre_sql = $this->preSql($params);
         $sql = "SELECT * FROM `{$table}` $pre_sql";
-        $stmt = $wpdb->get_results($wpdb->prepare($sql), $params['output']);
+        $stmt = $this->wpdb->get_results($this->wpdb->prepare($sql), $params['output']);
         return $stmt;
     }
 
@@ -77,10 +75,9 @@ abstract class Database_Model extends Database_Generator
      * @param array $fields
      * @return void
      */
-    public static function get($fields = [])
+    public function get($fields = [])
     {
-        global $wpdb;
-        $table = static::$table_name;
+        $table = $this->prefix . static::$table;
         $where = '';
 
         if (is_array($fields) && count($fields) > 0) {
@@ -96,7 +93,7 @@ abstract class Database_Model extends Database_Generator
         }
 
         $sql = "SELECT * FROM `{$table}` {$where}";
-        $stmt = $wpdb->get_row($wpdb->prepare($sql));
+        $stmt = $this->wpdb->get_row($this->wpdb->prepare($sql));
         return $stmt;
     }
 
@@ -106,12 +103,11 @@ abstract class Database_Model extends Database_Generator
      * @param array $data
      * @return void
      */
-    public static function insert($data)
+    public function insert($data)
     {
-        global $wpdb;
-        $table = static::$table_name;
-        $insert = $wpdb->insert($table, $data);
-        return ($insert) ? $wpdb->insert_id : false;
+        $table = $this->prefix . $this->table;
+        $insert = $this->wpdb->insert($table, $data);
+        return ($insert) ? $this->wpdb->insert_id : false;
     }
 
     /**
@@ -120,11 +116,10 @@ abstract class Database_Model extends Database_Generator
      * @param array $where
      * @return void
      */
-    public static function delete($where)
+    public function delete($where)
     {
-        global $wpdb;
-        $table = static::$table_name;
-        $delete = $wpdb->delete($table, $where);
+        $table = $this->prefix . static::$table;
+        $delete = $this->wpdb->delete($table, $where);
         return $delete;
     }
 
@@ -135,11 +130,10 @@ abstract class Database_Model extends Database_Generator
      * @param array $where
      * @return void
      */
-    public static function update($data, $where)
+    public function update($data, $where)
     {
-        global $wpdb;
-        $table = static::$table_name;
-        $update = $wpdb->update($table, $data, $where);
+        $table = $this->prefix . static::$table;
+        $update = $this->wpdb->update($table, $data, $where);
         return $update;
     }
 
@@ -149,13 +143,12 @@ abstract class Database_Model extends Database_Generator
      * @param array $params
      * @return void
      */
-    public static function count($params = [])
+    public function count($params = [])
     {
-        global $wpdb;
-        $table = static::$table_name;
-        $pre_sql = static::preSql($params);
+        $table = $this->prefix . static::$table;
+        $pre_sql = $this->preSql($params);
         $sql = "SELECT COUNT(*) FROM `{$table}` {$pre_sql}";
-        $stmt = $wpdb->get_var($wpdb->prepare($sql));
+        $stmt = $this->wpdb->get_var($this->wpdb->prepare($sql));
         return $stmt;
     }
 
@@ -165,10 +158,9 @@ abstract class Database_Model extends Database_Generator
      * @param array $fields
      * @return void
      */
-    public static function countBy($fields = [])
+    public function countBy($fields = [])
     {
-        global $wpdb;
-        $table = static::$table_name;
+        $table = $this->prefix . static::$table;
         $params = ['fields' => []];
         if($fields){
             foreach($fields as $key => $value){
@@ -178,9 +170,9 @@ abstract class Database_Model extends Database_Generator
                 ];
             }
         }
-        $pre_sql = static::preSql($params);
+        $pre_sql = $this->preSql($params);
         $sql = "SELECT COUNT(*) FROM `{$table}` {$pre_sql}";
-        $stmt = $wpdb->get_var($wpdb->prepare($sql));
+        $stmt = $this->wpdb->get_var($this->wpdb->prepare($sql));
         return $stmt;
     }
 
@@ -189,9 +181,8 @@ abstract class Database_Model extends Database_Generator
      *
      * @return void
      */
-    public static function getError()
+    public function getError()
     {
-        global $wpdb;
-        return $wpdb->last_error;
+        return $this->wpdb->last_error;
     }
 }
