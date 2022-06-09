@@ -1,14 +1,7 @@
 <?php
- namespace ADHK\WP;
+ namespace AlirezaDehkar\WPDBModel;
 
-/**
- * Exit if accessed directly
- */
-if (!defined('ABSPATH')) {
-    exit;
-}
-
-use ADHK\WP\Database_Generator;
+use AlirezaDehkar\WPDBModel\Database_Generator;
 
 abstract class Database_Model extends Database_Generator
 {
