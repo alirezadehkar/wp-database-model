@@ -67,3 +67,20 @@ $byParams = $users->getResults([
   ]
 ]);
 ```
+
+
+You can even create or delete a database
+
+```php
+use AlirezaDehkar\WPDBModel\Database_Generator;
+
+$dbg = new Database_Generator();
+
+$dgb->setTableName('requests')->setRows([
+    '`id` BIGINT(20) unsigned NOT NULL AUTO_INCREMENT',
+    '`user_id` INT(11)',
+    'PRIMARY KEY(`id`)',
+])->createTable(); // create table
+
+$dbg->setTableName('requests')->drop(); // drop table
+```
