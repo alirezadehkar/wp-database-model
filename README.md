@@ -11,12 +11,12 @@ Sample 1/
 ```php
 use AlirezaDehkar\WPDBModel\Database;
 
-class DB_Requests extends Database
+class DB_Users extends Database
 {
-    protected static $table = 'requests';
+    protected static $table = 'users';
 }
 
-$requests = new DB_Requests();
+$users = new DB_Users();
 ```
 
 Sample 2/
@@ -24,7 +24,7 @@ Sample 2/
 ```php
 use AlirezaDehkar\WPDBModel\Database as DB;
 
-$requests = new DB('requests');
+$users = new DB('users');
 ```
 
 Methods
@@ -33,23 +33,27 @@ Methods
 
 # Usage Methods
 
-$requests = $requests->getResults(); // return all rows from 'requests' table
+$all = $users->getResults(); // return all rows from 'users' table
 
-$request = $requests->get(['id' => 1]); // return a row with params
+$request = $users->get(['id' => 1]); // return a row with params
 
-$insert = $requests->insert(['name' => 'Alireza', 'family' => 'Dehkar']); // insert data to 'requests' table
+$insert = $users->insert(['name' => 'Alireza', 'family' => 'Dehkar']); // insert data to 'requests' table
 
-$update = $requests->update(['name' => 'Alireza'], ['id' => 1]); // $data, $where
+$update = $users->update(['name' => 'Alireza'], ['id' => 1]); // $data, $where
 
-$delete = $requests->delete(['id' => 1]); // delete data with params from 'requests' table
+$delete = $users->delete(['id' => 1]); // delete data with params from 'requests' table
 
-$count = $requests->count(); // get all rows count
+$count = $users->count(); // get all rows count
 
-$countBy = $requests->countBy(['user_id' => 1]); // get rows coutn with params
+$countBy = $users->countBy(['user_id' => 1]); // get rows coutn with params
 
 # Methods "getResults,count" supports parameters (per_page, offset, order, order_by, fields)
 
-$byFields = $requests->getResults([
+$byParams = $users->getResults([
+  'per_page' => 10,
+  'offset' => 0,
+  'order' => 'DESC',
+  'order_by' => 'created_at',
   'fields' => [
     [
       'key' => 'status',
