@@ -35,32 +35,32 @@ Methods
 
 $all = $users->getResults(); // return all rows from 'users' table
 
-$request = $users->get(['id' => 1]); // return a row with params
+$user = $users->get(['id' => 1]); // return a row with params
 
-$insert = $users->insert(['name' => 'Alireza', 'family' => 'Dehkar']); // insert data to 'requests' table
+$insert = $users->insert(['display_name' => 'Alireza Dehkar', 'user_nicename' => 'admin']); // insert data to 'users' table
 
-$update = $users->update(['name' => 'Alireza'], ['id' => 1]); // $data, $where
+$update = $users->update(['display_name' => 'Alireza'], ['id' => 1]); // $data, $where
 
-$delete = $users->delete(['id' => 1]); // delete data with params from 'requests' table
+$delete = $users->delete(['id' => 1]); // delete data with params from 'users' table
 
 $count = $users->count(); // get all rows count
 
-$countBy = $users->countBy(['user_id' => 1]); // get rows coutn with params
+$countBy = $users->countBy(['user_status' => 1]); // get rows coutn with params
 
 # Methods "getResults,count" supports parameters (per_page, offset, order, order_by, fields)
 
 $byParams = $users->getResults([
-  'per_page' => 10,
+  'per_page' => 20,
   'offset' => 0,
   'order' => 'DESC',
-  'order_by' => 'created_at',
+  'order_by' => 'user_registered',
   'fields' => [
     [
-      'key' => 'status',
-      'value' => 'active'
+      'key' => 'user_status',
+      'value' => 1
     ],
     [
-      'key' => 'name',
+      'key' => 'display_name',
       'value' => '%Alireza%',
       'compare' => 'LIKE'
     ]
