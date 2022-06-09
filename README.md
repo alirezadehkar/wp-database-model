@@ -4,6 +4,14 @@ If you are a wordpress developer 😍:
 
 You can use this database model for your wordpress projects, using wordpress database makes your job a little easier.
 
+## Installation
+
+The supported way of installing WP Database Model package is via Composer.
+
+```bash
+composer require alirezadehkar/wp-database-model
+```
+
 Sample usage:
 
 Sample 1/
@@ -84,3 +92,11 @@ $dgb->setTableName('requests')->setRows([
 
 $dbg->setTableName('requests')->drop(); // drop table
 ```
+
+## License
+
+license. Please see the [license file](LICENCE) for more information.
+
+[![Latest Stable Version](https://poser.pugx.org/alirezadehkar/wp-database-model/v/stable)](https://packagist.org/packages/alirezadehkar/wp-database-model)
+[![Total Downloads](https://poser.pugx.org/alirezadehkar/wp-database-model/downloads)](https://packagist.org/packages/alirezadehkar/wp-database-model)
+[![License](https://poser.pugx.org/alirezadehkar/wp-database-model/license)](https://packagist.org/packages/alirezadehkar/wp-database-model)
