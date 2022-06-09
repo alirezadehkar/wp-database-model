@@ -5,7 +5,7 @@ class Database extends Database_Model
 {
     /**
      * 
-     * Database_Model __construct
+     * Database __construct
      * 
      */
     public function __construct($table = '')
