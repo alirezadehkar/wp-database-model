@@ -31,6 +31,8 @@ abstract class Database_Model
     private function preSql($params = []){
         $where = '';
         $value = '';
+        $limit = '';
+        
         $fields = (isset($params['fields']) && is_array($params['fields']) && count($params['fields']) > 0) ? $params['fields'] : [];
         if ($fields) {
             $i = 0;
