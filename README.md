@@ -45,7 +45,7 @@ $delete = $users->delete(['id' => 1]); // delete data with params from 'users' t
 
 $count = $users->count(); // get all rows count
 
-$countBy = $users->countBy(['user_status' => 1]); // get rows coutn with params
+$countBy = $users->countBy(['user_status' => 1]); // get rows count with params
 
 # Methods "getResults,count" supports parameters (per_page, offset, order, order_by, fields)
 
