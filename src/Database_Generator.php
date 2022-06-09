@@ -1,12 +1,6 @@
 <?php
- namespace ADHK\WP;
+ namespace AlirezaDehkar\WPDBModel;
 
-/**
- * Exit if accessed directly
- */
-if (!defined('ABSPATH')) {
-    exit;
-}
 class Database_Generator
 {
     protected $_prefix;
