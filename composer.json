@@ -1,0 +1,14 @@
+{
+    "name": "alirezadehkar/wp-database-model",
+    "description": "This package makes working with wordpress database a little easier",
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Alireza Dehkar",
+            "email": "alirezadehkar@gmail.com"
+        }
+    ],
+    "minimum-stability": "stable",
+    "require": {}
+}
