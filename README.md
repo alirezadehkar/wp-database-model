@@ -9,9 +9,9 @@ Sample usage:
 Sample 1/
 
 ```php
-use AlirezaDehkar\WPDBModel\Database_Model;
+use AlirezaDehkar\WPDBModel\Database;
 
-class DB_Requests extends Database_Model
+class DB_Requests extends Database
 {
     protected static $table = 'requests';
 }
