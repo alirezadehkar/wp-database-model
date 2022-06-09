@@ -1,10 +1,26 @@
 <?php
 namespace AlirezaDehkar\WPDBModel;
+
 abstract class Database_Model
 {
     private $wpdb;
     private $prefix;
     protected static $table;
+
+    /**
+     * 
+     * Database_Model __construct
+     * 
+     */
+    public function __construct($table = '')
+    {
+        global $wpdb;
+        $this->wpdb = $wpdb;
+        $this->prefix = $this->wpdb->prefix;
+        if(!empty($table)){
+            static::$table = $table;
+        }
+    }
 
     /**
      * Generate where sql query
@@ -39,15 +55,12 @@ abstract class Database_Model
             }
         }
 
-        if (!array_key_exists('output', $params)) {
-            $params['output'] = OBJECT;
-        }
-
         if(isset($params['per_page']) && isset($params['offset'])){
             $limit = " LIMIT {$params['offset']}, {$params['per_page']}";
         } elseif(isset($params['per_page'])) {
             $limit = " LIMIT {$params['per_page']}";
         }
+        
         $order = (array_key_exists('order', $params)) ? $params['order'] : 'DESC';
         $order_by = (array_key_exists('order_by', $params)) ? " ORDER BY `{$params['order_by']}` {$order}" : '';
 
@@ -62,10 +75,14 @@ abstract class Database_Model
      */
     public function getResults($params = [])
     {
-        $table = $this->prefix . $this->table;
+        $table = $this->prefix . static::$table;
         $pre_sql = $this->preSql($params);
         $sql = "SELECT * FROM `{$table}` $pre_sql";
-        $stmt = $this->wpdb->get_results($this->wpdb->prepare($sql), $params['output']);
+        $output = OBJECT;
+        if (array_key_exists('output', $params) && !empty($params['output'])) {
+            $output = $params['output'];
+        }
+        $stmt = $this->wpdb->get_results($this->wpdb->prepare($sql), $output);
         return $stmt;
     }
 
@@ -105,7 +122,7 @@ abstract class Database_Model
      */
     public function insert($data)
     {
-        $table = $this->prefix . $this->table;
+        $table = $this->prefix . static::$table;
         $insert = $this->wpdb->insert($table, $data);
         return ($insert) ? $this->wpdb->insert_id : false;
     }
