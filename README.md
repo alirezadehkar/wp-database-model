@@ -4,6 +4,8 @@ If you are a wordpress developer 😍:
 
 You can use this database model for your wordpress projects, using wordpress database makes your job a little easier.
 
+This package uses the [wpdb](https://developer.wordpress.org/reference/classes/wpdb/) class.
+
 ## Installation
 
 The supported way of installing WP Database Model package is via Composer.
