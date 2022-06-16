@@ -179,20 +179,18 @@ abstract class Database_Model
      */
     public function countBy($fields = [])
     {
-        $table = $this->prefix . static::$table;
         $params = ['fields' => []];
         if($fields){
             foreach($fields as $key => $value){
-                $params['fields'][] = [
-                    'key' => $key,
-                    'value' => $value,
-                ];
+                if(!empty($key)){
+                    $params['fields'][] = [
+                        'key' => $key,
+                        'value' => $value,
+                    ];
+                }
             }
         }
-        $pre_sql = $this->preSql($params);
-        $sql = "SELECT COUNT(*) FROM `{$table}` {$pre_sql}";
-        $stmt = $this->wpdb->get_var($this->wpdb->prepare($sql));
-        return $stmt;
+        return $this->count($params);
     }
 
     /**
