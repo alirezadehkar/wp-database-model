@@ -4,6 +4,8 @@ If you are a wordpress developer 😍:
 
 You can use this database model for your wordpress projects, using wordpress database makes your job a little easier.
 
+This package uses the [wpdb](https://developer.wordpress.org/reference/classes/wpdb/) class.
+
 ## Installation
 
 The supported way of installing WP Database Model package is via Composer.
@@ -74,23 +76,6 @@ $byParams = $users->getResults([
     ]
   ]
 ]);
-```
-
-
-You can even create or delete a database
-
-```php
-use AlirezaDehkar\WPDBModel\Database_Generator;
-
-$dbg = new Database_Generator();
-
-$dgb->setTableName('requests')->setRows([
-    '`id` BIGINT(20) unsigned NOT NULL AUTO_INCREMENT',
-    '`user_id` INT(11)',
-    'PRIMARY KEY(`id`)',
-])->createTable(); // create table
-
-$dbg->setTableName('requests')->drop(); // drop table
 ```
 
 ## License
